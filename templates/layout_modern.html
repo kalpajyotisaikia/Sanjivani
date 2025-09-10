@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <h1 class="site-title">Sanjivani – MedReport</h1>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-dark text-light">
+<nav style="width: 100%; display: flex; justify-content: center;">
+  <a class="navbar-brand fw-bold" href="/">
+    Digital Medical Records at Your Fingertips - Fast. Secure. Accessible
+  </a>
+</nav>
+
+
+
+
+
+    <div class="d-flex">
+      {% if session.get('patient_name') %}
+      <div class="me-3">Hi, <strong>{{ session.get('patient_name') }}</strong></div>
+      <a class="btn btn-outline-light btn-sm" href="{{ url_for('logout') }}">Logout</a>
+      {% elif session.get('admin_username') %}
+      <div class="me-3">Admin: <strong>{{ session.get('admin_username') }}</strong></div>
+      <a class="btn btn-outline-light btn-sm" href="{{ url_for('logout') }}">Logout</a>
+      {% elif session.get('super_username') %}
+      <div class="me-3">Super: <strong>{{ session.get('super_username') }}</strong></div>
+      <a class="btn btn-outline-light btn-sm" href="{{ url_for('logout') }}">Logout</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+<main class="container my-5">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, msg in messages %}
+        <div class="alert alert-{{ 'danger' if category=='danger' else ('success' if category=='success' else 'info') }}">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer class="py-4 text-center demo-footer">
+    © 2024 Sanjivani MedReport. All rights reserved.<br>
+    Developed by DG Developers
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

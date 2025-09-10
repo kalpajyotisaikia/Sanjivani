@@ -1,0 +1,11 @@
+{% extends "layout_modern.html" %}
+{% block content %}
+<h3>Super Admin Dashboard</h3>
+<div class="row">
+  <div class="col-md-4"><div class="card p-3"><h4>Hospitals</h4><p>{{ stats['hospitals'] }}</p></div></div>
+  <div class="col-md-4"><div class="card p-3"><h4>Patients</h4><p>{{ stats['patients'] }}</p></div></div>
+  <div class="col-md-4"><div class="card p-3"><h4>Reports</h4><p>{{ stats['reports'] }}</p></div></div>
+</div>
+<h5 class="mt-4">Hospitals</h5>
+<table class="table table-dark table-striped"><thead><tr><th>Hospital</th><th>Location</th><th>Prefix</th></tr></thead><tbody>{% for h in hospitals %}<tr><td>{{ h['hospital_name'] }}</td><td>{{ h['location'] }}</td><td>{{ h['prefix'] }}</td></tr>{% endfor %}</tbody></table>
+{% endblock %}
