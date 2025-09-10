@@ -4,6 +4,13 @@ from werkzeug.utils import secure_filename
 from datetime import datetime
 import config
 
+# Create Flask app FIRST
+app = Flask(__name__)
+app.config.from_object('config')
+
+# Optional: only needed if not already set inside config.py
+# app.secret_key = app.config['SECRET_KEY']
+
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
